@@ -55,7 +55,7 @@ with tf.Session() as sess:
     correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
     print('acc is:')
-    print(accuracy.eval({x: mnist.test.images.reshape(-1, 28, 28, 1).transpose((0, 3, 1, 2)), y_: mnist.test.labels.reshape(-1, 10)}))
+    print(accuracy.eval({x: mnist.validation.images.reshape(-1, 28, 28, 1).transpose((0, 3, 1, 2)), y_: mnist.validation.labels.reshape(-1, 10)}))
     sess.close()
     
 #        graph_def = graph.as_graph_def()
