@@ -15,12 +15,8 @@ with tf.Graph().as_default() as graph:
             
             model = tf.layers.conv2d(model, filters=32, kernel_size=(3, 3), padding='same', data_format='channels_first') #7x7
             logits = tf.layers.conv2d(model, filters=10, kernel_size=(7, 7), data_format='channels_first', name='output_embeddings')
-            #model = tf.layers.average_pooling2d(model, pool_size=(7, 7), strides=1, data_format='channels_first')
-            
-            print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', logits.shape)
+
             logits = tf.squeeze(logits, axis=[-2, -1])
-            print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', logits.shape)
-            
             return logits
         
         embeddings = network(x)
