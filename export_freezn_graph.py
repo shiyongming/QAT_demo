@@ -30,11 +30,11 @@ with tf.Graph().as_default() as graph:
         
     tf.contrib.quantize.experimental_create_eval_graph(symmetric=True, use_qdq=True)
     saver = tf.train.Saver()
-    checkpoint_dir = 'mnist_ckpt/'
+    checkpoint_dir = 'saved_results/mnist_ckpt/'
     checkpoint_name = 'model.ckpt'
     #checkpoint_dir = 'test_no_dense/'
     #checkpoint_name = 'model.ckpt'
-    frozen_dir = "mnist_frozen/"
+    frozen_dir = "saved_results/"
     frozen_filename = "frozen_graph.pb"
         
     with tf.Session() as sess:
