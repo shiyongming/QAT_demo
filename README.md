@@ -10,6 +10,7 @@ Do it step by step.
 - 0.6 `cd onnx-graphsurgeon && make install`
 - 0.7 `cd ..`
 
+
 - 1 `python qat_training.py`
 - 2 `python export_freezn_graph.py`
 - 3 `python fold_constants.py -i saved_results/frozen_graph.pb`
