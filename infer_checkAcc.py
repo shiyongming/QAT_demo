@@ -18,6 +18,12 @@ print(mnist.validation.images.shape, mnist.validation.labels.shape)
 
 TRT_DYNAMIC_DIM = -1
 
+def load_normalized_test_case(test_image, pagelocked_buffer):
+    # Expected input dimensions
+    C, H, W = (1, 28, 28)
+    # Normalize the images, concatenate them and copy to pagelocked memory.
+    data = np.asarray(test_image).flatten()
+    np.copyto(pagelocked_buffer, data)
 
 class HostDeviceMem(object):
     r""" Simple helper data class that's a little nicer to use than a 2-tuple.
@@ -104,7 +110,9 @@ def infer(engine_path, batch_size, input_images, input_labels, verbose=False):
                 # Do inference for every batch.
                 # print(input_images[start_idx:start_idx + effective_batch_size, 0, :, :])
 
-                inputs[0].host = input_images[start_idx]
+                #inputs[0].host = input_images[start_idx]
+                # Load the test images and preprocess them
+                load_normalized_test_case(input_images[start_idx], inputs[0].host)
 
                 cuda.memcpy_htod(inputs[0].device, inputs[0].host)
                 context.execute(batch_size, bindings)

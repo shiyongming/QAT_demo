@@ -45,8 +45,8 @@ def constfold(graphdef, output_name):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("Folds constants in the provided frozen model")
     parser.add_argument("-i", "--input", help="The input frozen model to be constant folded.")
-    parser.add_argument("--output_node", default="softmax", help="Output node names separated by commas")
-    parser.add_argument("-o", "--output", default="folded_mnist.pb", help="Path to constant folded output graph")
+    parser.add_argument("--output_node", default="softmax_1", help="Output node names separated by commas")
+    parser.add_argument("-o", "--output", default="saved_results/folded_mnist.pb", help="Path to constant folded output graph")
     args, _ = parser.parse_known_args()
 
     with open(args.input, 'rb') as f:

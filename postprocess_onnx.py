@@ -43,7 +43,7 @@ def process_transpose_nodes(graph):
 if __name__=='__main__':
     parser = argparse.ArgumentParser("Post process ONNX graph by removing transpose nodes")
     parser.add_argument("--input", required=True, help="Input onnx graph")
-    parser.add_argument("--output", default='postprocessed_rn50.onnx', help="Name of post processed onnx graph")
+    parser.add_argument("--output", default='mnist_qat_post.onnx', help="Name of post processed onnx graph")
     args = parser.parse_args()
     
     # Load the rn50 graph

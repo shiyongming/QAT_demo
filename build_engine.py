@@ -86,10 +86,12 @@ def preprocess_network(network):
                 if (inp == layer.get_input(k)):
                     mode = trt.ScaleMode.UNIFORM
                     quantize = network.add_scale(inp, mode, scale=quant_scale, shift=zeros)
+                    quantize = network.add_scale(inp, mode, scale=1, shift=zeros)
                     quantize.set_output_type(0, trt.int8)
                     quantize.name = "InputQuantizeNode"
                     quantize.get_output(0).name = "QuantizedInput"
                     dequantize = network.add_scale(quantize.get_output(0), mode, scale=dequant_scale, shift=zeros)
+                    dequantize = network.add_scale(quantize.get_output(0), mode, scale=1, shift=zeros)
                     dequantize.set_output_type(0, trt.float32)
                     dequantize.name = "InputDequantizeNode"
                     dequantize.get_output(0).name = "DequantizedInput"
@@ -124,7 +126,7 @@ def build_engine_onnx(model_file, verbose=False):
         config.max_workspace_size = 1 << 30
         config.flags = config.flags | 1 << int(trt.BuilderFlag.INT8)
         # Setting the (min, opt, max) batch sizes to be 1. Users need to configure this according to their requirements.
-        config.add_optimization_profile(build_profile(builder, network, profile_shapes={'input' : [(1, 3, 224, 224),(1, 3, 224, 224),(1, 3, 224, 224)]}))
+        config.add_optimization_profile(build_profile(builder, network, profile_shapes={'input' : [(1, 1, 28, 28),(1, 1, 28, 28),(1, 1, 28, 28)]}))
 
         return builder.build_engine(network, config)
 
