@@ -5,9 +5,10 @@ Do it step by step.
 - 0.1  `docker pull nvcr.io/nvidia/tensorflow:20.01-tf1-py3`
 - 0.2 `docker run --rm -it --gpus all nvcr.io/nvidia/tensorflow:20.01-tf1-py3`
 - 0.3 `git clone https://github.com/shiyongming/QAT_demo.git`
-- 0.4 `pip install -r requirements.txt`
-- 0.5 `cd onnx-graphsurgeon && make install`
-- 0.6 `cd ..`
+- 0.4 `cd QAT_demo/`
+- 0.5 `pip install -r requirements.txt`
+- 0.6 `cd onnx-graphsurgeon && make install`
+- 0.7 `cd ..`
 
 - 1 `python qat_training.py`
 - 2 `python export_freezn_graph.py`
