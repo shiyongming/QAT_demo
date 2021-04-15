@@ -28,4 +28,4 @@ Do it step by step.
 - 7 `trtexec --loadEngine=saved_results/mnist_qat.engine`
 - 8 `python infer_checkAcc.py -e saved_results/mnist_qat.engine -b 1`
 
-The result of Step 8 looks abnormal. It may is casued by the wrong scale of input placeholder. 
+The result of Step 8 looks abnormal. It may be casued by the wrong scale of input placeholder. 
